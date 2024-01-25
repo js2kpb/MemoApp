@@ -1,27 +1,46 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
 import { Link, router } from 'expo-router'
+import { useState } from 'react'
 
 import Button from '../../components/button'
 
 const handlePress = (): void => {
   // ログイン
-  router.push('/memo/list')
+  router.replace('/memo/list')
 }
 
 const LogIn = (): JSX.Element => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
-        <TextInput style={styles.input} value='Email address' />
-        <TextInput style={styles.input} value='Password' />
-        <Button label='Submit' onPress={handlePress}/>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => { setEmail(text) }}
+          autoCapitalize='none'
+          keyboardType="email-address"
+          placeholder='Email Address'
+          textContentType='emailAddress'
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => { setPassword(text) }}
+          autoCapitalize='none'
+          secureTextEntry
+          placeholder='Password'
+          textContentType='password'
+        />
+        <Button label='Submit' onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registerd?</Text>
           <Link href='auth/sign_up' asChild>
             <TouchableOpacity>
-            <Text style={styles.footerLink}>Sign up here!</Text>
+              <Text style={styles.footerLink}>Sign up here!</Text>
             </TouchableOpacity>
           </Link>
         </View>
