@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import Button from '../../components/button'
 import { auth } from '../../config'
+
 const handlePress = (email: string, password: string): void => {
   // ログイン
   signInWithEmailAndPassword(auth, email, password)
